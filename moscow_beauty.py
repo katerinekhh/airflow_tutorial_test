@@ -22,9 +22,9 @@ def get_streets_and_amount_of_wifi_points(url: str):
 
     for index in df.index:
         if df.loc[index, 'FunctionFlag'] == 'действует' and (
-                df.loc[index, 'AccessFlag'] == 'открытая сеть'
-            ):
-            if ('Address' in df.columns) and ('улица' in  df.loc[index, 'Address']):
+            df.loc[index, 'AccessFlag'] == 'открытая сеть'
+        ):
+            if ('Address' in df.columns) and ('улица' in df.loc[index, 'Address']):
                 street_name = df.loc[index, 'Address'].split(', ')[1]
             elif 'ParkName' in df.columns:
                 street_name = df.loc[index, 'ParkName']
@@ -42,10 +42,10 @@ def get_top_five_streets_to_surf_the_internet(places_and_wifi_amounts: dict):
     return sorted(list(places_and_wifi_amounts.items()), key=lambda x: x[1])[-5:]
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     for place, url in WIFI_IN_CULTURAL_MOSCOW_PLACES_URLS:
         wifi_points_of_cultural_places = get_streets_and_amount_of_wifi_points(url=url)
-        
+
         if place == 'parks':
             top_five_parks_to_surf_the_internet = get_top_five_streets_to_surf_the_internet(wifi_points_of_cultural_places)
         else:
@@ -64,12 +64,3 @@ if __name__ == "__main__":
     print(f'top 5 streets to surf the Internet:')
     for street_and_wifi in top_five_streets_to_surf_the_internet:
         print('street:', street_and_wifi[0], ': wi-fi points amount:', street_and_wifi[1])
-
-
-
-
-
-
-
-
-
