@@ -1,0 +1,3 @@
+MacOS:
+
+$ brew install python@3.8
